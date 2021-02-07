@@ -104,5 +104,14 @@ export default {
     timeout: 2500,
   },
 
-  build: {},
+  build: {
+    postcss: {
+      plugins: {
+        // Disable `postcss-url`
+        "postcss-url": false,
+        // Add some plugins
+        "postcss-nesting": {},
+      },
+    },
+  },
 };
