@@ -1,58 +1,108 @@
 export default {
-  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
-  ssr: true,
+  ssr: false,
 
   target: "static",
 
   head: {
-    title: "tidis-fe",
+    title: "Tidis",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
+      {
+        hid: "description",
+        name: "description",
+        content: "The cleanest way of making your links short!",
+      },
+      {
+        property: "twitter:card",
+        content: "summary_large_image",
+      },
+      {
+        property: "twitter:url",
+        content: "https://tidis.net/",
+      },
+      {
+        property: "twitter:title",
+        content: "Tidis",
+      },
+      {
+        property: "twitter:description",
+        content: "The cleanest way of making your links short!",
+      },
+      {
+        property: "og:type",
+        content: "website",
+      },
+      {
+        property: "og:url",
+        content: "https://tidis.net/",
+      },
+      {
+        property: "og:title",
+        content: "Tidis",
+      },
+      {
+        property: "og:description",
+        content: "The cleanest way of making your links short!",
+      },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "16x16",
+        href: "/favicon-16x16.png",
+      },
+      {
+        rel: "icon",
+        type: "image/png",
+        sizes: "32x32",
+        href: "/favicon-32x32.png",
+      },
+      {
+        rel: "apple-touch-icon",
+        type: "image/png",
+        sizes: "180x180",
+        href: "/apple-touch-icon.png",
+      },
+      {
+        rel: "android-chrome",
+        type: "image/png",
+        sizes: "192x192",
+        href: "/android-chrome-192x192.png",
+      },
+      {
+        rel: "android-chrome",
+        type: "image/png",
+        sizes: "512x512",
+        href: "/android-chrome-512x512.png",
+      },
+      {
+        rel: "manifest",
+        href: "/site.webmanifest",
+      },
+    ],
   },
 
   server: {
     port: 8000, // default: 3000
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [],
+  css: ["~/assets/scss/global"],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/typescript
-    "@nuxt/typescript-build",
-    // https://go.nuxtjs.dev/tailwindcss
-    "@nuxtjs/tailwindcss",
-  ],
+  buildModules: ["@nuxt/typescript-build", "@nuxtjs/tailwindcss"],
 
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    "@nuxtjs/axios",
-    // https://go.nuxtjs.dev/pwa
-    "@nuxtjs/pwa",
-  ],
+  modules: ["@nuxtjs/axios"],
 
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
-
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
-  pwa: {
-    manifest: {
-      lang: "en",
-    },
+  axios: {
+    baseUrl: "https://api.tidis.net/v1/",
+    timeout: 2500,
   },
 
-  // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 };
