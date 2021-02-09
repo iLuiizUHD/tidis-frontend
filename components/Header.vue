@@ -33,7 +33,7 @@
 import Vue from "vue";
 export default Vue.extend({
   data: () => ({
-    isMenuOpen: true,
+    isMenuOpen: false,
 
     user: {
       email: "",
