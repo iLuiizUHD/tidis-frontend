@@ -2,7 +2,7 @@
   <div>
     <Header />
     <section class="container">
-      <h1>Hello World</h1>
+      <h1 class="m-32">Hello World</h1>
     </section>
   </div>
 </template>
