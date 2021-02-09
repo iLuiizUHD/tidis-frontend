@@ -8,7 +8,7 @@
     </div>
     <div class="t-header-actions">
       <section class="t-menu">
-        <button class="t-user-pfp" @focus="handleMenu" @blur="handleMenu">
+        <button class="t-user-pfp" @focus="handleMenu" @blur="handleMenu" @click="handleMenu">
           <img src="/android-chrome-192x192.png" />
         </button>
 
