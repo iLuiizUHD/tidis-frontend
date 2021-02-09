@@ -2,9 +2,9 @@
   <header class="t-header">
     <div class="t-header-empty"></div>
     <div class="t-header-logo-container">
-      <a href="/" class="t-logo" title="Home">
+      <nuxt-link to="/" class="t-logo" title="Home">
         <img src="/android-chrome-192x192.png" alt="Tidis logo" />
-      </a>
+      </nuxt-link>
     </div>
     <div class="t-header-actions">
       <section class="t-menu">
@@ -13,9 +13,15 @@
         </button>
 
         <transition name="slide-fade">
-          <ul v-show="isMenuOpen" class="absolute t-user-menu">
-            <li v-for="(i, o) in 10" :key="o">
-              <nuxt-link to="/dashboard/dashboard">Dashboard {{ i }}</nuxt-link>
+          <ul v-show="isMenuOpen" class="t-user-menu">
+            <li>
+              <nuxt-link to="/dashboard">Dashboard</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/shortener">Shortener</nuxt-link>
+            </li>
+            <li>
+              <nuxt-link to="/about">About</nuxt-link>
             </li>
           </ul>
         </transition>
@@ -73,23 +79,25 @@ export default Vue.extend({
       float: right;
 
       .t-user-menu {
+        @apply absolute;
+        @apply text-gray-700;
+
         background: whitesmoke;
         right: 0;
 
         li {
-          color: #151515;
-          border: 1px solid #f00;
-          margin: 5px 25px;
-          transition: 0.2s cubic-bezier(0.455, 0.03, 0.515, 0.955);
-          cursor: pointer;
-
           a {
-            padding: 20px;
+            @apply rounded-t;
+            @apply bg-gray-200;
+            @apply py-2;
+            @apply px-4;
+            @apply block;
+            @apply whitespace-no-wrap;
           }
-        }
 
-        li:hover {
-          background: #e2e2e2;
+          a:hover {
+            @apply bg-gray-400;
+          }
         }
       }
     }
@@ -113,9 +121,13 @@ export default Vue.extend({
 .slide-fade-leave-active {
   transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
 }
-.slide-fade-enter,
-.slide-fade-leave-to {
+.slide-fade-enter {
   transform: translateY(10px);
+  opacity: 0;
+}
+
+.slide-fade-leave-to {
+  transform: translateY(-10px);
   opacity: 0;
 }
 </style>

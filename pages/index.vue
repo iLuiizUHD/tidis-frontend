@@ -1,6 +1,5 @@
 <template>
   <div class="t-site-content">
-    <Header />
     <section class="container">
       <h1 class="m-32">Hello World</h1>
     </section>

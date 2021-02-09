@@ -85,6 +85,11 @@ export default {
     ],
   },
 
+  layoutTransition: {
+    name: "layout",
+    mode: "out-in",
+  },
+
   server: {
     port: 8000, // default: 3000
   },
