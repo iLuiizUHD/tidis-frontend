@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <main class="main-container">
     <Nuxt />
-  </div>
+  </main>
 </template>
 
 <style lang="scss"></style>
