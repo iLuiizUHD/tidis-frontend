@@ -1,7 +1,11 @@
 <template>
-  <div class="container">
-    <section class="login-screen w-2/4 h-56">
+  <div class="container h-full">
+    <section class="login-screen w-2/4">
       <div class="login-card">
+        <div class="logo-container">
+          <img src="/logo-T.png" alt="Tidis logo" />
+        </div>
+
         <h2 class="login-card-title">Login with your account!</h2>
         <p align="justify">
           Please, to proceed to your account use your, Google, Twitter, Facebook
@@ -41,10 +45,11 @@ export default Vue.extend({});
 
 .login-screen {
   @apply m-auto;
-  @apply pt-20;
+  @apply justify-center;
 
   .login-card {
     @apply p-10;
+    @apply pt-5;
     @apply mx-auto;
     @apply rounded-md;
     @apply shadow-md;
@@ -54,6 +59,16 @@ export default Vue.extend({});
     @apply flex-col;
 
     background: whitesmoke;
+
+    .logo-container {
+      @apply flex;
+      @apply pb-8;
+      margin: auto;
+
+      img {
+        @apply w-24;
+      }
+    }
 
     .login-card-title {
       @apply text-3xl;
