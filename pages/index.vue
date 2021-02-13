@@ -1,8 +1,7 @@
 <template>
   <div class="t-site-content">
-    <section class="container">
-      <h1 class="m-32">Hello World</h1>
-    </section>
+    <Header />
+    <h1 class="m-32">Hello World</h1>
   </div>
 </template>
 
@@ -16,11 +15,4 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
-.container {
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-</style>
+<style lang="scss"></style>

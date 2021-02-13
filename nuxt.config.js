@@ -94,7 +94,10 @@ export default {
     port: 8000, // default: 3000
   },
 
-  css: ["~/assets/scss/global"],
+  css: [
+    "~/assets/scss/global",
+    "~/node_modules/@mdi/font/css/materialdesignicons.min.css",
+  ],
 
   plugins: [],
 

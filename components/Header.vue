@@ -8,21 +8,41 @@
     </div>
     <div class="t-header-actions">
       <section class="t-menu">
-        <button class="t-user-pfp" @focus="handleMenu" @blur="handleMenu">
-          <img src="/android-chrome-192x192.png" />
+        <button
+          v-if="!isUserLogged"
+          class="t-login-btn"
+          @click="$router.push('/auth/login')"
+        >
+          <span class="t-login-btn-text"> Login </span>
         </button>
+        <div v-else>
+          <button class="t-user-pfp" @focus="handleMenu" @blur="handleMenu">
+            <img
+              src="https://lh3.googleusercontent.com/ogw/ADGmqu8sRtM4M9yFl7CpkeOACg_PdkgKN1JzOLCVAYAugQ=s32-c-mo"
+            />
+          </button>
+        </div>
 
         <transition name="slide-fade">
-          <ul v-show="isMenuOpen" class="t-user-menu">
+          <ul v-if="isMenuOpen" class="t-user-menu">
+            <div class="t-user-details">
+              <img
+                class="t-user-details-pfp w-2/4"
+                src="https://lh3.googleusercontent.com/ogw/ADGmqu8sRtM4M9yFl7CpkeOACg_PdkgKN1JzOLCVAYAugQ=s32-c-mo"
+              />
+              <p class="t-user-details-name">Luiz A F Gomes</p>
+              <p class="t-user-details-email">me@luizg.dev</p>
+            </div>
+            <li class="p-2">
+              <hr />
+            </li>
             <li>
               <nuxt-link to="/dashboard">Dashboard</nuxt-link>
             </li>
             <li>
-              <nuxt-link to="/shortener">Shortener</nuxt-link>
+              <nuxt-link to="#" w>Logout</nuxt-link>
             </li>
-            <li>
-              <nuxt-link to="/about">About</nuxt-link>
-            </li>
+            <li></li>
           </ul>
         </transition>
       </section>
@@ -34,18 +54,12 @@ import Vue from "vue";
 export default Vue.extend({
   data: () => ({
     isMenuOpen: false,
-
-    user: {
-      email: "",
-      name: "",
-      photo: "",
-    },
+    isUserLogged: false,
   }),
+  computed: {},
   methods: {
     handleMenu() {
-      setTimeout(() => {
-        this.isMenuOpen = !this.isMenuOpen;
-      }, 50);
+      this.isMenuOpen = !this.isMenuOpen;
     },
   },
 });
@@ -57,6 +71,8 @@ export default Vue.extend({
   @apply grid-cols-3;
   @apply grid-flow-row;
   @apply gap-3;
+
+  margin-top: 5px;
 
   .t-header-logo-container {
     @apply flex;
@@ -75,24 +91,98 @@ export default Vue.extend({
     @apply flex-row;
     @apply justify-end;
 
+    @apply pr-3;
+
+    .t-header-nav {
+      margin-top: auto;
+      margin-bottom: auto;
+      margin-right: 50px;
+
+      ul {
+        li {
+          text-align: center;
+          margin: 0px 5px 0px 5px;
+          @apply inline;
+
+          a {
+            padding: 10px;
+          }
+
+          a:hover {
+            background: #151515;
+          }
+        }
+      }
+    }
+
     .t-menu {
       float: right;
+      margin-top: auto;
+      margin-bottom: auto;
+
+      height: 64px;
+      min-height: 64px;
+      max-height: 64px;
+
+      .t-login-btn {
+        background: #ffee00;
+
+        padding: 10px 35px;
+        margin-top: 10px;
+
+        @apply rounded-md;
+        @apply shadow-md;
+
+        font-weight: bold;
+        color: black;
+      }
+
+      .t-login-btn:hover > .t-login-btn-text i {
+        opacity: 1;
+      }
 
       .t-user-menu {
         @apply absolute;
-        @apply text-gray-700;
+        @apply text-black;
+
+        @apply w-48;
+
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
 
         background: whitesmoke;
-        right: 0;
+
+        right: 55px;
+
+        .t-user-details {
+          @apply flex;
+          @apply flex-col;
+          @apply justify-center;
+          @apply items-center;
+
+          margin: 10px;
+
+          .t-user-details-pfp {
+            @apply rounded-full;
+          }
+
+          .t-user-details-name {
+            margin-top: 5px;
+            font-weight: bold;
+          }
+        }
 
         li {
           a {
-            @apply rounded-t;
-            @apply bg-gray-200;
+            @apply rounded;
             @apply py-2;
             @apply px-4;
             @apply block;
             @apply whitespace-no-wrap;
+
+            background-color: whitesmoke;
           }
 
           a:hover {
@@ -105,7 +195,9 @@ export default Vue.extend({
 }
 
 .t-user-pfp {
-  outline: none;
+  margin-top: auto;
+  margin-bottom: auto;
+
   img {
     @apply rounded-full;
 
@@ -116,10 +208,10 @@ export default Vue.extend({
 }
 
 .slide-fade-enter-active {
-  transition: all 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 .slide-fade-leave-active {
-  transition: all 0.3s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.3s ease-in-out;
 }
 .slide-fade-enter {
   transform: translateY(10px);
