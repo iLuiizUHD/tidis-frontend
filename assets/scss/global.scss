@@ -43,3 +43,10 @@ html {
   justify-content: center;
   flex-direction: column;
 }
+
+input.input-custom {
+  border: 1px solid #f00;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1.3rem;
+}
