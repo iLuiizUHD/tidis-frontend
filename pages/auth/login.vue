@@ -3,7 +3,13 @@
     <section class="login-screen sm:w-full md:w-3/4 lg:w-3/5 xl:w-2/6">
       <div class="login-card">
         <div class="logo-container">
-          <img src="/logo-T.png" alt="Tidis logo" />
+          <img
+            src="/logo-T.png"
+            alt="Tidis logo"
+            style="cursor: pointer"
+            title="Home"
+            @click="$router.push('/')"
+          />
         </div>
 
         <h2 class="login-card-title md:text-justify">
