@@ -21,30 +21,114 @@
         </p>
 
         <div class="login-form-fields pt-10">
-          <button class="login-with-google">
+          <button class="login-with-google" @click="handleLoginWithGoogle">
             <img src="/utils/Google__G__Logo.svg" alt="Google logo" />
             <span>Sign-in with Google</span>
           </button>
-          <button class="login-with-twitter">
+          <button class="login-with-twitter" @click="handleLoginWithTwitter">
             <img src="/utils/twitter-bird-logo-white.svg" alt="Twitter logo" />
             <span>Sign-in with Twitter</span>
           </button>
-          <button class="login-with-facebook">
+          <button class="login-with-facebook" @click="handleLoginWithFacebook">
             <img src="/utils/f_logo_RGB-White_250.png" alt="Facebook logo" />
             <span>Sign-in with Facebook</span>
           </button>
-          <button class="login-with-github">
+          <button class="login-with-github" @click="handleLoginWithGithub">
             <img src="/utils/GitHub-Mark-Light-64px.png" alt="Github logo" />
             <span>Sign-in with GitHub</span>
           </button>
         </div>
+        <transition name="fade">
+          <Loading v-if="loading" />
+        </transition>
       </div>
     </section>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({});
+
+export default Vue.extend({
+  name: "AuthScreen",
+  data() {
+    return {
+      loading: false,
+    };
+  },
+  methods: {
+    async handleLoginWithGoogle() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.GoogleAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+
+    async handleLoginWithTwitter() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.TwitterAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+
+    async handleLoginWithFacebook() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.FacebookAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+
+    async handleLoginWithGithub() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.GithubAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+  },
+});
 </script>
 <style lang="scss">
 * {
