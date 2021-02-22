@@ -105,11 +105,36 @@ export default {
 
   buildModules: ["@nuxt/typescript-build", "@nuxtjs/tailwindcss"],
 
-  modules: ["@nuxtjs/axios"],
+  modules: ["@nuxtjs/axios", "@nuxtjs/firebase"],
+
+  firebase: {
+    config: {
+      apiKey: "AIzaSyBXAlSzIbljNjQeY_2S1KF57L7nsDU3odQ",
+      authDomain: "auth.tidis.net",
+      projectId: "tidis-75bc9",
+      storageBucket: "tidis-75bc9.appspot.com",
+      messagingSenderId: "269032770605",
+      appId: "1:269032770605:web:fec5d81801b4a79346bca4",
+    },
+    services: {
+      auth: true,
+    },
+    auth: {
+      persistence: "local", // default
+      initialize: {
+        onAuthStateChangedMutation: "ON_AUTH_STATE_CHANGED_MUTATION",
+        onAuthStateChangedAction: "onAuthStateChangedAction",
+        subscribeManually: false,
+      },
+      ssr: false, // default
+      emulatorPort: 9099,
+      emulatorHost: "http://localhost",
+    },
+  },
 
   axios: {
-    baseUrl: "https://api.tidis.net/v1/",
-    timeout: 2500,
+    baseUrl: process.env.NUXT_ENV_API_URL,
+    timeout: 25000,
   },
 
   build: {

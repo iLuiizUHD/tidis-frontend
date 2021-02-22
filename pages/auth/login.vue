@@ -1,176 +1,278 @@
 <template>
-  <div class="container h-full">
-    <section class="login-screen w-2/4">
+  <div class="login-container">
+    <section class="login-screen sm:w-full md:w-3/4 lg:w-3/5 xl:w-2/6">
       <div class="login-card">
         <div class="logo-container">
-          <img src="/logo-T.png" alt="Tidis logo" />
+          <img
+            src="/logo-T.png"
+            alt="Tidis logo"
+            style="cursor: pointer"
+            title="Home"
+            @click="$router.push('/')"
+          />
         </div>
 
-        <h2 class="login-card-title">Login with your account!</h2>
+        <h2 class="login-card-title md:text-justify">
+          Login with your account!
+        </h2>
         <p align="justify">
           Please, to proceed to your account use your, Google, Twitter, Facebook
           or GitHub accounts!
         </p>
 
         <div class="login-form-fields pt-10">
-          <button class="login-with-google">
+          <button class="login-with-google" @click="handleLoginWithGoogle">
             <img src="/utils/Google__G__Logo.svg" alt="Google logo" />
             <span>Sign-in with Google</span>
           </button>
-          <button class="login-with-twitter">
+          <button class="login-with-twitter" @click="handleLoginWithTwitter">
             <img src="/utils/twitter-bird-logo-white.svg" alt="Twitter logo" />
             <span>Sign-in with Twitter</span>
           </button>
-          <button class="login-with-facebook">
+          <button class="login-with-facebook" @click="handleLoginWithFacebook">
             <img src="/utils/f_logo_RGB-White_250.png" alt="Facebook logo" />
             <span>Sign-in with Facebook</span>
           </button>
-          <button class="login-with-github">
+          <button class="login-with-github" @click="handleLoginWithGithub">
             <img src="/utils/GitHub-Mark-Light-64px.png" alt="Github logo" />
             <span>Sign-in with GitHub</span>
           </button>
         </div>
+        <transition name="fade">
+          <Loading v-if="loading" />
+        </transition>
       </div>
     </section>
   </div>
 </template>
 <script lang="ts">
 import Vue from "vue";
-export default Vue.extend({});
+
+export default Vue.extend({
+  name: "AuthScreen",
+  data() {
+    return {
+      loading: false,
+    };
+  },
+  methods: {
+    async handleLoginWithGoogle() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.GoogleAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+
+    async handleLoginWithTwitter() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.TwitterAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+
+    async handleLoginWithFacebook() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.FacebookAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+
+    async handleLoginWithGithub() {
+      this.loading = true;
+
+      try {
+        const provider = new this.$fireModule.auth.GithubAuthProvider();
+        const authData = await this.$fire.auth.signInWithPopup(provider);
+
+        console.log(authData);
+
+        this.loading = false;
+
+        //
+      } catch (error) {
+        console.log(error);
+        this.loading = false;
+      }
+    },
+  },
+});
 </script>
 <style lang="scss">
 * {
   color: #383838;
 }
 
-.login-screen {
-  @apply m-auto;
-  @apply justify-center;
+.login-container {
+  @apply flex;
 
-  .login-card {
-    @apply p-10;
-    @apply pt-5;
-    @apply mx-auto;
-    @apply rounded-md;
-    @apply shadow-md;
-    @apply border;
-    @apply border-gray-100;
-    @apply flex;
-    @apply flex-col;
+  height: 100vh;
+  margin: auto;
 
-    background: whitesmoke;
+  .login-screen {
+    @apply m-auto;
+    @apply justify-center;
 
-    .logo-container {
+    user-select: none;
+
+    .login-card {
+      @apply p-10;
+      @apply pt-5;
+      @apply mx-auto;
+      @apply rounded-md;
+      @apply shadow-md;
+      @apply border;
+      @apply border-gray-100;
       @apply flex;
-      @apply pb-8;
-      margin: auto;
+      @apply flex-col;
 
-      img {
-        @apply w-24;
-      }
-    }
+      background: whitesmoke;
 
-    .login-card-title {
-      @apply text-3xl;
-    }
-
-    .login-form-fields {
-      .login-with {
-        padding: 5px;
-        margin: auto;
-        width: 250px;
-
-        font-family: "Roboto", sans-serif;
-        font-weight: 500;
-
+      .logo-container {
         @apply flex;
-        @apply align-middle;
-        @apply rounded-sm;
-        @apply shadow-md;
-
-        background: #f9fafb;
-        @apply border;
-        @apply border-gray-200;
-
-        height: 40px;
+        @apply pb-8;
+        margin: auto;
 
         img {
-          width: 18px;
-          height: 18px;
-          margin-right: 24px;
-          margin-left: 8px;
-
-          margin-top: auto;
-          margin-bottom: auto;
+          @apply w-24;
         }
-
-        span {
-          margin-right: 8px;
-          margin-top: auto;
-          margin-bottom: auto;
-        }
-
-        &:hover {
-          @apply bg-gray-200;
-        }
-
-        margin-bottom: 15px;
       }
 
-      button.login-with-google {
-        @extend .login-with;
-
-        margin-bottom: 15px;
+      .login-card-title {
+        @apply text-3xl;
       }
 
-      button.login-with-github {
-        @extend .login-with;
+      .login-form-fields {
+        .login-with {
+          padding: 5px;
+          margin: auto;
+          width: 250px;
 
-        background: #2c2c2c;
-        @apply border;
-        @apply border-gray-800;
+          font-family: "Roboto", sans-serif;
+          font-weight: 500;
 
-        span {
-          color: white;
+          @apply flex;
+          @apply align-middle;
+          @apply rounded-sm;
+          @apply shadow-md;
+
+          background: #f9fafb;
+
+          height: 40px;
+
+          img {
+            width: 18px;
+            height: 18px;
+            margin-right: 24px;
+            margin-left: 8px;
+
+            margin-top: auto;
+            margin-bottom: auto;
+          }
+
+          span {
+            margin-right: 8px;
+            margin-top: auto;
+            margin-bottom: auto;
+          }
+
+          &:hover {
+            @apply bg-gray-200;
+          }
+
+          margin-bottom: 15px;
         }
 
-        &:hover {
-          background: #151515;
+        button.login-with-google {
+          @extend .login-with;
+
+          @apply border;
+          @apply border-gray-200;
+
+          margin-bottom: 15px;
         }
 
-        margin-bottom: 15px;
-      }
+        button.login-with-github {
+          @extend .login-with;
 
-      button.login-with-twitter {
-        @extend .login-with;
+          background: #2c2c2c;
+          @apply border;
+          @apply border-gray-800;
 
-        background: #1d9bf0;
+          span {
+            color: white;
+          }
 
-        span {
-          color: white;
+          &:hover {
+            background: #151515;
+          }
+
+          margin-bottom: 15px;
         }
 
-        &:hover {
-          background: #1189d8;
+        button.login-with-twitter {
+          @extend .login-with;
+
+          background: #1d9bf0;
+
+          span {
+            color: white;
+          }
+
+          &:hover {
+            background: #1189d8;
+          }
+
+          margin-bottom: 15px;
         }
 
-        margin-bottom: 15px;
-      }
+        button.login-with-facebook {
+          @extend .login-with;
 
-      button.login-with-facebook {
-        @extend .login-with;
+          background: #1778f2;
 
-        background: #1778f2;
+          span {
+            color: white;
+          }
 
-        span {
-          color: white;
+          &:hover {
+            background: #1469d1;
+          }
+
+          margin-bottom: 15px;
         }
-
-        &:hover {
-          background: #1469d1;
-        }
-
-        margin-bottom: 15px;
       }
     }
   }
