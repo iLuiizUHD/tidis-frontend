@@ -124,7 +124,7 @@ export default {
       initialize: {
         onAuthStateChangedMutation: "ON_AUTH_STATE_CHANGED_MUTATION",
         onAuthStateChangedAction: "onAuthStateChangedAction",
-        subscribeManually: false,
+        subscribeManually: true,
       },
       ssr: false, // default
       emulatorPort: 9099,

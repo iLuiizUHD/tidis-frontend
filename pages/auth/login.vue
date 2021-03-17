@@ -61,15 +61,19 @@ export default Vue.extend({
 
       try {
         const provider = new this.$fireModule.auth.GoogleAuthProvider();
-        const authData = await this.$fire.auth.signInWithPopup(provider);
 
-        console.log(authData);
+        const { user } = await this.$fire.auth.signInWithPopup(provider); // It's automatically saved
+
+        if (!user?.uid) {
+          throw new Error("An error occurred while trying to login!");
+        }
 
         this.loading = false;
 
+        this.$router.push("/dashboard");
+
         //
       } catch (error) {
-        console.log(error);
         this.loading = false;
       }
     },
@@ -79,11 +83,16 @@ export default Vue.extend({
 
       try {
         const provider = new this.$fireModule.auth.TwitterAuthProvider();
-        const authData = await this.$fire.auth.signInWithPopup(provider);
 
-        console.log(authData);
+        const { user } = await this.$fire.auth.signInWithPopup(provider); // It's automatically saved
+
+        if (!user?.uid) {
+          throw new Error("An error occurred while trying to login!");
+        }
 
         this.loading = false;
+
+        this.$router.push("/dashboard");
 
         //
       } catch (error) {
@@ -97,11 +106,16 @@ export default Vue.extend({
 
       try {
         const provider = new this.$fireModule.auth.FacebookAuthProvider();
-        const authData = await this.$fire.auth.signInWithPopup(provider);
 
-        console.log(authData);
+        const { user } = await this.$fire.auth.signInWithPopup(provider); // It's automatically saved
+
+        if (!user?.uid) {
+          throw new Error("An error occurred while trying to login!");
+        }
 
         this.loading = false;
+
+        this.$router.push("/dashboard");
 
         //
       } catch (error) {
@@ -115,11 +129,16 @@ export default Vue.extend({
 
       try {
         const provider = new this.$fireModule.auth.GithubAuthProvider();
-        const authData = await this.$fire.auth.signInWithPopup(provider);
 
-        console.log(authData);
+        const { user } = await this.$fire.auth.signInWithPopup(provider); // It's automatically saved
+
+        if (!user?.uid) {
+          throw new Error("An error occurred while trying to login!");
+        }
 
         this.loading = false;
+
+        this.$router.push("/dashboard");
 
         //
       } catch (error) {

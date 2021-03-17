@@ -17,21 +17,16 @@
         </button>
         <div v-else>
           <button class="t-user-pfp" @focus="handleMenu" @blur="handleMenu">
-            <img
-              src="https://lh3.googleusercontent.com/ogw/ADGmqu8sRtM4M9yFl7CpkeOACg_PdkgKN1JzOLCVAYAugQ=s32-c-mo"
-            />
+            <img :src="user.photoUrl" />
           </button>
         </div>
 
         <transition name="slide-fade">
           <ul v-if="isMenuOpen" class="t-user-menu">
             <div class="t-user-details">
-              <img
-                class="t-user-details-pfp w-2/4"
-                src="https://lh3.googleusercontent.com/ogw/ADGmqu8sRtM4M9yFl7CpkeOACg_PdkgKN1JzOLCVAYAugQ=s32-c-mo"
-              />
-              <p class="t-user-details-name">Luiz A F Gomes</p>
-              <p class="t-user-details-email">me@luizg.dev</p>
+              <img class="t-user-details-pfp w-24" :src="user.photoURL" />
+              <p class="t-user-details-name">{{ user.displayName }}</p>
+              <p class="t-user-details-email">{{ user.email }}</p>
             </div>
             <li class="p-2">
               <hr />
@@ -53,10 +48,27 @@
 import Vue from "vue";
 export default Vue.extend({
   data: () => ({
-    isMenuOpen: false,
+    isMenuOpen: true,
     isUserLogged: false,
+    user: {
+      email: "",
+      displayName: "",
+      photoUrl: "",
+    },
   }),
   computed: {},
+  created() {
+    if (this.$fire.auth.currentUser) {
+      this.isUserLogged = true;
+
+      this.user.email =
+        this.$fire.auth.currentUser.providerData[0]?.email || "";
+      this.user.displayName = this.$fire.auth.currentUser.displayName || "";
+      this.user.photoUrl = this.$fire.auth.currentUser.photoURL || "";
+
+      console.log();
+    }
+  },
   methods: {
     handleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
@@ -145,7 +157,7 @@ export default Vue.extend({
         @apply absolute;
         @apply text-black;
 
-        @apply w-48;
+        @apply w-64;
 
         border-top-right-radius: 5px;
         border-top-left-radius: 5px;
